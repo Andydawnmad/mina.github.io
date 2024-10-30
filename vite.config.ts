@@ -4,28 +4,19 @@ import version from "vite-plugin-package-version";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/mina.github.io/',
-  plugins: [react()],
+  // Đường dẫn cơ sở cho GitHub Pages, thay đổi theo tên repo của bạn
+  base: '/mina.github.io/', // Đảm bảo tên này khớp với tên repository trên GitHub
+  plugins: [
+    react(), // Sử dụng plugin React
+    version() // Thêm plugin để quản lý phiên bản
+  ],
   build: {
     rollupOptions: {
       output: {
-        // manualChunks(id) {
-        //   if (id.includes("node_modules")) {
-        //     return id
-        //       .toString()
-        //       .split("node_modules/")[1]
-        //       .split("/")[0]
-        //       .toString();
-        //   }
-        // },
         manualChunks: {
-          // Specify manual chunk names and modules
+          // Chia nhỏ các chunk cho React và Lottie
           react: ["react", "react-dom"],
           lottie: ["react-lottie"],
         },
-      },
-    },
-  },
-});
-
-
+        // Bạn có thể sử dụng hàm này nếu muốn tự động chia nhỏ các mô-đun từ node_modules
+        //
